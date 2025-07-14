@@ -4,19 +4,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $data = [
-        'nama' => 'Abe Kolin'
+        'nama' => 'Abe Kolin',
+        'title' => 'Home'
     ];
-    return view('welcome', $data);
+    return view('home', $data);
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    $data = [
+        'title' => 'Blog'
+    ];
+    return view('blog', $data);
 });
 
 Route::get('/about', function () {
-    return view('about');
+    $data = [
+        'title' => 'About'
+    ];
+    return view('about', $data);
 });
 
 Route::get('/contact', function () {
-    return view('contact');
+    $data = [
+        'title' => 'Contact'
+    ];
+    return view('contact', $data);
 });
