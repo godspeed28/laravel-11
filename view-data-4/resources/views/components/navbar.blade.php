@@ -43,7 +43,7 @@
                   From: "transform opacity-100 scale-100"
                   To: "transform opacity-0 scale-95"
               -->
-                          <div x-bind:class="open ? 'visible' : 'invisible'"
+                          <div x-show="open"
                               class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden"
                               role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                               tabindex="-1">
@@ -85,14 +85,10 @@
       <div class="md:hidden" x-show="open" id="mobile-menu">
           <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                  aria-current="page">Home</a>
-              <a href="/blog"
-                  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Blog</a>
-              <a href="/about"
-                  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-              <a href="/contact"
-                  class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+              <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+              <x-nav-link href="/blog" :active="request()->is('blog')">Blog</x-nav-link>
+              <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
+              <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
           </div>
           <div class="border-t border-gray-700 pt-4 pb-3">
               <div class="profil-mobile flex items-center px-5">
