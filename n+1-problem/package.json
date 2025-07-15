@@ -1,0 +1,29 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "serve": "php artisan serve",
+        "start": "concurrently \"npm run dev\" \"npm run serve\"",
+        "setup": "npm install && composer install && cp .env.example .env && php artisan key:generate && php artisan migrate --seed && npm run start",
+        "fresh": "php artisan migrate:fresh --seed",
+        "lint": "npx eslint resources/js",
+        "preview": "vite preview",
+        "clean": "rm -rf node_modules public/build",
+        "watch": "vite --watch",
+        "build:tailwind": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --minify"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.7.4",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.2.0",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.13",
+        "vite": "^6.0.11"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.7"
+    }
+}
