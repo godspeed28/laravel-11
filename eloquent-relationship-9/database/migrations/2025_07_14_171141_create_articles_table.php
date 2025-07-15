@@ -11,7 +11,10 @@ return new class extends Migration {
             $table->id(); // id
             $table->string('slug')->unique(); // slug
             $table->string('title'); // title
-            $table->string('author'); // author
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'articles_author_id'
+            );
             $table->text('body'); // body isi artikel
             $table->timestamps(); // created_at dan updated_at
         });

@@ -14,7 +14,12 @@ class Article extends Model
     protected $fillable = [
         'slug',
         'title',
-        'author',
+        'author_id',
         'body',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

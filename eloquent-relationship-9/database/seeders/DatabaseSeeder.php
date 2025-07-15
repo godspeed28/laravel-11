@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->unverified()->create();
-        User::factory(5)->create();
-        User::factory()->admin()->create();
+        // User::factory(10)->unverified()->create();
+        // User::factory(5)->create();
+        // User::factory()->admin()->create();
 
-        Article::factory(5)->create();
+        Article::factory(100)->recycle(User::factory(5)->create())->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
