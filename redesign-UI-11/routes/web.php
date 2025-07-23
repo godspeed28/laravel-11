@@ -25,7 +25,7 @@ Route::get('/blog', function (Request $request) {
         });
     }
 
-    $blogs = $query->latest()->paginate(5)->withQueryString();
+    $blogs = $query->latest()->paginate(6)->withQueryString();
 
     return view('blog', [
         'title' => 'Blog',
@@ -55,7 +55,7 @@ Route::get('/author/{user}', function (User $user) {
 
     $data = [
         'title' => 'Articles by ' . $user->name,
-        'posts' => $user->posts()->with(['author', 'category'])->latest()->paginate(5)->withQueryString(),
+        'posts' => $user->posts()->with(['author', 'category'])->latest()->paginate(6)->withQueryString(),
     ];
 
     return view('blog', $data);
@@ -65,7 +65,7 @@ Route::get('/category/{category:slug}', function (Category $category) {
 
     $data = [
         'title' => 'Articles in ' . $category->name,
-        'posts' => $category->posts()->with(['author', 'category'])->latest()->paginate(5)->withQueryString(),
+        'posts' => $category->posts()->with(['author', 'category'])->latest()->paginate(6)->withQueryString(),
     ];
 
     return view('blog', $data);
