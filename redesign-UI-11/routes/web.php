@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $data = [
@@ -13,15 +14,23 @@ Route::get('/', function () {
     return view('home', $data);
 });
 
-Route::get('/blog', function () {
+Route::get('/blog', function (Request $request) {
 
-    $blogs = Article::all();
+    $query = Article::with(['author', 'category']);
 
-    $data = [
+    if ($request->has('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('body', 'like', '%' . $request->search . '%');
+        });
+    }
+
+    $blogs = $query->latest()->paginate(5)->withQueryString();
+
+    return view('blog', [
         'title' => 'Blog',
         'posts' => $blogs,
-    ];
-    return view('blog', $data);
+    ]);
 });
 
 Route::get('/about', function () {
@@ -46,7 +55,7 @@ Route::get('/author/{user}', function (User $user) {
 
     $data = [
         'title' => 'Articles by ' . $user->name,
-        'posts' => $user->posts,
+        'posts' => $user->posts()->with(['author', 'category'])->latest()->paginate(5)->withQueryString(),
     ];
 
     return view('blog', $data);
@@ -56,7 +65,7 @@ Route::get('/category/{category:slug}', function (Category $category) {
 
     $data = [
         'title' => 'Articles in ' . $category->name,
-        'posts' => $category->posts,
+        'posts' => $category->posts()->with(['author', 'category'])->latest()->paginate(5)->withQueryString(),
     ];
 
     return view('blog', $data);

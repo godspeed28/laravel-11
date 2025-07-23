@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(5)->create();
         // User::factory()->admin()->create();
 
-        Article::factory(200)->recycle(Category::factory(5)->create())->recycle(User::factory(5)->create())->create();
+        // Article::factory(200)->recycle(Category::factory(5)->create())->recycle(User::factory(5)->create())->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-        // $this->call([
-        //     CategorySeeder::class,
-        //     UserSeeder::class,
-        //     ArticleSeeder::class,
-        // ]);
+        $this->call([
+            CategorySeeder::class,
+            UserSeeder::class,
+            ArticleSeeder::class,
+        ]);
     }
 }
